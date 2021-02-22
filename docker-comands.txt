@@ -1,0 +1,19 @@
+#correr repo
+docker run nombrecontenedor 
+
+#correr contenedor con nombre especifico
+docker run --name namecontainer reponame
+
+#listar contenedores 
+docker ps -a
+
+#
+
+#eliminar todos los contenedores
+docker container prune
+
+#eliminar contenedores
+docker rm nombrecontenedor
+
+#cambiar nombrecontenedor
+docker rename oldname newname
