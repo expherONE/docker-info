@@ -1,13 +1,11 @@
 #correr repo
-docker run nombrecontenedor 
+docker run contenedor 
 
-#correr contenedor con nombre especifico
-docker run --name namecontainer reponame
+#run docker cambiando nombre
+docker run --name nombrecontenedor contenedor
 
 #listar contenedores 
 docker ps -a
-
-#
 
 #eliminar todos los contenedores
 docker container prune
@@ -17,3 +15,53 @@ docker rm nombrecontenedor
 
 #cambiar nombrecontenedor
 docker rename oldname newname
+
+#docker corre por defecto el main process del contenedor, si no corre el proceso principal se apaga
+docker run ubuntu --->>> se inicializa pero se apaga solo ya que no corre el main process
+
+#contenedrr modo interactivo
+docker -it container (regularmente SO)
+
+#cambiando el proceso principal para que no se deshabilite automaticamente el contenedor
+sudo docker run --name alwaysup2 -d ubuntu tail -f /dev/null
+
+#correr bash en un contenedor con SO flag -it interactivo
+sudo docker exec -it nombrecontenedor bash
+
+#encotrar el ID del proceso corriendo de contenedor filtrado por nombre
+ sudo docker inspect --format '{{.State.Pid}}' nombrecontenedor
+
+#contenedor nginx
+sudo docker run -d --name namecontainer nginx
+
+#detener contenedor
+sudo docker stop namecontainer
+
+#correr contenedor nginx  -d detach(segundo plano) -p publish(puerto)
+sudo docker run --name proxy -d -p 2220:80 nginx
+
+#consultar los logs
+sudo docker logs namecontainer
+
+#consultar logs con terminal escuchando -f follow
+sudo docker logs -f namecontainer
+
+#consultar ultimos 10 logs
+sudo docker logs --tail 10 -f namecontainer
+
+#entrar a bash de base de datos 
+sudo docker exec -it namecontainer bash
+
+--->>BIND MOUNTS<<-------
+#los bind mounts perminten sacar o ingresar informacion en los contenedores
+#guardar archivos fuera del contenedor la -v bindmount bash puede ser reemplazado por mongo
+sudo docker run -d -name namecontainer -v /ruta/pc/local:/ruta/contenedor bash
+
+---->>>volumenes<<<<<------
+sudo docker volume ls
+
+#crear volumen
+sudo docker volume create namevolume
+
+#crear container con volume >src=volumename >dst=ruta container
+ sudo docker run -d --name db --mount src=dbdata,dst=/data/db mongo
