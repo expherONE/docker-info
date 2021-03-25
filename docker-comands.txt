@@ -65,3 +65,6 @@ sudo docker volume create namevolume
 
 #crear container con volume >src=volumename >dst=ruta container
  sudo docker run -d --name db --mount src=dbdata,dst=/data/db mongo
+ 
+#Crear contenedor de nginx con dist
+sudo docker run -d -p 9090:80 -v /home/molguin/dist/rents/:/usr/share/nginx/html nginx:alpine
