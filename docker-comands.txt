@@ -34,6 +34,12 @@ sudo docker exec -it nombrecontenedor bash
 #contenedor nginx
 sudo docker run -d --name namecontainer nginx
 
+#docker network
+sudo docker network ls
+
+#inspeccionar 
+
+
 #detener contenedor
 sudo docker stop namecontainer
 
