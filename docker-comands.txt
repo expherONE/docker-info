@@ -128,3 +128,12 @@ sudo docker run -d --name app -p 3000:3000 --env MONGO_URL=mongodb://db:27017/te
 sudo docker run -d -p 9090:80 -v /home/molguin/dist/rents/:/usr/share/nginx/html nginx:alpine
 
 --->>DOCKER-COMPOSE<<-------
+#en linux instalar docker compose es un binario
+https://docs.docker.com/compose/install/
+#agregré el binario como alias para usarlo como docker-compose
+alias docker-compose="sudo /usr/local/bin/docker-compose"
+
+#ejecutar un docker-compose
+docker-compose up -d
+-d= dettach "que se ejecute en segundo plano sin perder la consola"
+
