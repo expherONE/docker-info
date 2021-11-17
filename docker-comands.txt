@@ -107,5 +107,24 @@ ubuntu:platzi = IMAGE:VERSION
 #crear un nuevo tag de una IMAGE
 sudo docker tag ubuntu:platzi moises/ubuntu:platzi
 
+--->>NETWORK<<-------
+#VER REDES
+sudo docker network ls
+
+#crear una red
+#sudo docker network create --attachable nombreRed
+sudo docker network create --attachable platzinet
+--atachable= que contenedores se puedan unir a la red
+
+#conectarse a una red de docker
+#sudo docker network connect nombreRed nombreContenedor
+sudo docker network connect platzinet db
+
+#conectar mongo con la app de prueba
+sudo docker run -d --name app -p 3000:3000 --env MONGO_URL=mongodb://db:27017/test platziapp
+
+--->>NGINX<<-------
 #Crear contenedor de nginx con dist
 sudo docker run -d -p 9090:80 -v /home/molguin/dist/rents/:/usr/share/nginx/html nginx:alpine
+
+--->>DOCKER-COMPOSE<<-------
