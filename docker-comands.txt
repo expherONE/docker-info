@@ -13,6 +13,9 @@ docker container prune
 #eliminar contenedores
 docker rm nombrecontenedor
 
+#eliminar contenedor forzandolo
+docker rm -f nombreContenedor
+
 #cambiar nombrecontenedor
 docker rename oldname newname
 
@@ -25,7 +28,7 @@ docker -it container (regularmente SO)
 #cambiando el proceso principal para que no se deshabilite automaticamente el contenedor
 sudo docker run --name alwaysup2 -d ubuntu tail -f /dev/null
 
-#correr bash en un contenedor con SO flag -it interactivo
+#correr bash en un contenedor
 sudo docker exec -it nombrecontenedor bash
 
 #encotrar el ID del proceso corriendo de contenedor filtrado por nombre
@@ -61,16 +64,48 @@ sudo docker exec -it namecontainer bash
 --->>BIND MOUNTS<<-------
 #los bind mounts perminten sacar o ingresar informacion en los contenedores
 #guardar archivos fuera del contenedor la -v bindmount bash puede ser reemplazado por mongo
-sudo docker run -d -name namecontainer -v /ruta/pc/local:/ruta/contenedor bash
+#sudo docker run -d --name db -v /home/molguin/docker/mongodata:/data/db mongo
+
+sudo docker run -d -name namecontainer -v /ruta/pc/local:/ruta/contenedor IMAGE
 
 ---->>>volumenes<<<<<------
+#nos permiten utilizar una parte del disco donde esta instalado docker pero a la que solo tiene acceso Docker
+#listar volumenes
 sudo docker volume ls
 
-#crear volumen
+#eliminar volumenes sin usar
+sudo docker volume prune
+
+#crear volumen para guardar datos de contenedores
 sudo docker volume create namevolume
 
-#crear container con volume >src=volumename >dst=ruta container
- sudo docker run -d --name db --mount src=dbdata,dst=/data/db mongo
+#crear container redirigiendo los datos a un volumen de docker
+ sudo docker run -d --name nombreContenedor --mount src=nombreVolumen,dst=/directorio/de/contenedor IMAGE
+ --mount = para redirigir los datos al volumen
  
+#Copiar archivos del sistema a contenedor
+sudo docker cp nombreArchivo nombreContenedor:/ruta/de/destino/en/contenedor/nuevo.nombre 
+
+#extraer archivos de un contenedor
+sudo docker cp nombreContenedor:/ruta/en/contenedor nombredeCarpetaDestino
+
+--->>IMAGES<<-------
+#consultar imagenes
+sudo docker image ls
+
+#eliminar imagen
+sudo docker rmi nombreImagen
+
+#crear una imagen a partir de un Dockerfile
+sudo docker build -t ubuntu:platzi .
+
+build= construciion de imagen
+-t = tag para la imagen
+ubuntu:platzi = IMAGE:VERSION
+. = directorio actual
+
+#crear un nuevo tag de una IMAGE
+sudo docker tag ubuntu:platzi moises/ubuntu:platzi
+
 #Crear contenedor de nginx con dist
 sudo docker run -d -p 9090:80 -v /home/molguin/dist/rents/:/usr/share/nginx/html nginx:alpine
