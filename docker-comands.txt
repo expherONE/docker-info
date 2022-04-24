@@ -129,11 +129,20 @@ sudo docker run -d -p 9090:80 -v /home/molguin/dist/rents/:/usr/share/nginx/html
 
 --->>DOCKER-COMPOSE<<-------
 #en linux instalar docker compose es un binario
-https://docs.docker.com/compose/install/
+#https://docs.docker.com/compose/install/
 #agregré el binario como alias para usarlo como docker-compose
-alias docker-compose="sudo /usr/local/bin/docker-compose"
+#alias docker-compose="sudo /usr/local/bin/docker-compose"
 
 #ejecutar un docker-compose
 docker-compose up -d
--d= dettach "que se ejecute en segundo plano sin perder la consola"
+#-d= dettach "que se ejecute en segundo plano sin perder la consola"
+
+#postgresql
+#respaldo de base de datos
+#docker exec container pg_dumpall -U usuario > /ruta/destino/nombrearchivo.sql
+docker exec a1c0bfaf7f34 pg_dumpall -U postgres > /home/back-up/difusionDatos.sql
+
+#restaurar base de datos
+#leer archivo de back-up | docker exec -i nombreContenedor psql -U usuario
+cat /home/back-up/difusionDatos.sql | docker exec -i 40b5afca4829 psql -U postgres
 
