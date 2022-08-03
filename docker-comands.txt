@@ -137,6 +137,14 @@ sudo docker run -d -p 9090:80 -v /home/molguin/dist/rents/:/usr/share/nginx/html
 docker-compose up -d
 #-d= dettach "que se ejecute en segundo plano sin perder la consola"
 
+#EJECUTAR COMPOSE CON ENVIROMENTS
+docker-compose --env-file ./db.env up
+
+#EJECUTAR COMPOSE CON ENVIROMENTS Y OTRO NOMBRE COMPOSE
+docker-compose -f nombreCompose.yml --env-file ./db.env up
+
+--->>POSTGRES<<----------------
+
 #postgresql
 #respaldo de base de datos
 #docker exec container pg_dumpall -U usuario > /ruta/destino/nombrearchivo.sql
