@@ -31,6 +31,11 @@ sudo docker run --name alwaysup2 -d ubuntu tail -f /dev/null
 #correr bash en un contenedor
 sudo docker exec -it nombrecontenedor bash
 
+#inspeccionar
+#encontrar encontrar detalles de contenedor
+sudo docker inspect nombreContenedor
+
+
 #encotrar el ID del proceso corriendo de contenedor filtrado por nombre
  sudo docker inspect --format '{{.State.Pid}}' nombrecontenedor
 
@@ -39,9 +44,6 @@ sudo docker run -d --name namecontainer nginx
 
 #docker network
 sudo docker network ls
-
-#inspeccionar 
-
 
 #detener contenedor
 sudo docker stop namecontainer
@@ -54,6 +56,9 @@ sudo docker logs namecontainer
 
 #consultar logs con terminal escuchando -f follow
 sudo docker logs -f namecontainer
+
+#consulta logs con filtro grep
+sudo docker logs nombreContenedor | grep plabraDeBusqueda
 
 #consultar ultimos 10 logs
 sudo docker logs --tail 10 -f namecontainer
