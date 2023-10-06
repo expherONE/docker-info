@@ -155,7 +155,11 @@ docker-compose -f nombreCompose.yml --env-file ./db.env up
 #docker exec container pg_dumpall -U usuario > /ruta/destino/nombrearchivo.sql
 docker exec a1c0bfaf7f34 pg_dumpall -U postgres > /home/back-up/difusionDatos.sql
 
+#crea la base antes de restaurarla
+sudo docker exec -it 7cdf3763f681 psql -U postgres -c "CREATE DATABASE nombreBase;"
+
 #restaurar base de datos
 #leer archivo de back-up | docker exec -i nombreContenedor psql -U usuario
-cat /home/back-up/difusionDatos.sql | docker exec -i 40b5afca4829 psql -U postgres
+
+cat ../../5oct.sql | sudo docker exec -i 7cdf3763f681 psql -U postgres -d nombreBas
 
