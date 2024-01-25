@@ -163,3 +163,6 @@ sudo docker exec -it 7cdf3763f681 psql -U postgres -c "CREATE DATABASE nombreBas
 
 cat ../../5oct.sql | sudo docker exec -i 7cdf3763f681 psql -U postgres -d nombreBas
 
+------>>>>mysql<<<<<----------
+#sacar respaldo de un contenedor mysql
+docker exec mysql-container mysqldump -u root -p{pass} {basedatos} > {nombre}.sql
