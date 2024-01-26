@@ -166,3 +166,6 @@ cat ../../5oct.sql | sudo docker exec -i 7cdf3763f681 psql -U postgres -d nombre
 ------>>>>mysql<<<<<----------
 #sacar respaldo de un contenedor mysql
 docker exec mysql-container mysqldump -u root -p{pass} {basedatos} > {nombre}.sql
+
+#instalar respaldo
+docker-compose exec mysql-container bash -c 'mysql -u root -p"$password" "$baseDatos" < /root/test.sql'
