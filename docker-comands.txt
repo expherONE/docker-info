@@ -169,3 +169,6 @@ docker exec mysql-container mysqldump -u root -p{pass} {basedatos} > {nombre}.sq
 
 #instalar respaldo
 docker-compose exec mysql-container bash -c 'mysql -u root -p"$password" "$baseDatos" < /root/test.sql'
+
+#entrar a la consola
+docker exec -it mysql-container mysql -u root -p{password}
