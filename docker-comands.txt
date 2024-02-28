@@ -164,11 +164,14 @@ sudo docker exec -it 7cdf3763f681 psql -U postgres -c "CREATE DATABASE nombreBas
 cat ../../5oct.sql | sudo docker exec -i 7cdf3763f681 psql -U postgres -d nombreBas
 
 ------>>>>mysql<<<<<----------
+#acceder al contenedor
+docker exec -it name-container mysql -u usuario -p
+
 #sacar respaldo de un contenedor mysql
 docker exec mysql-container mysqldump -u root -p{pass} {basedatos} > {nombre}.sql
 
 #instalar respaldo
-docker-compose exec mysql-container bash -c 'mysql -u root -p"$password" "$baseDatos" < /root/test.sql'
+cat /home/expher/Documents/docker/wp/wp-official-image/feb28.sql | docker exec -i nombre-contenedor mysql -u usuario -pPASS exampledb
 
 #entrar a la consola
 docker exec -it mysql-container mysql -u root -p{password}
