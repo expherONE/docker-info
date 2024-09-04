@@ -1,0 +1,40 @@
+Para instalar Docker en una Raspberry Pi
+
+1. Actualizar el Sistema:
+Antes de instalar Docker, asegúrate de que tu sistema esté actualizado:
+
+sudo apt-get update
+sudo apt-get upgrade
+
+2. Instalar Docker:
+Docker tiene un script oficial que facilita la instalación en sistemas compatibles. Puedes ejecutarlo directamente en tu Raspberry Pi:
+
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+
+3. Agregar tu Usuario al Grupo docker:
+Para evitar tener que usar sudo cada vez que ejecutas un comando de Docker, puedes añadir tu usuario al grupo docker:
+
+sudo usermod -aG docker $USER
+Para aplicar los cambios, es recomendable reiniciar la Raspberry Pi o cerrar y volver a iniciar sesión.
+
+4. Verificar la Instalación:
+Una vez completada la instalación, verifica que Docker esté funcionando correctamente:
+
+docker --version
+
+5. Habilitar Docker al Inicio:
+Para asegurarte de que Docker se inicie automáticamente con el sistema, habilítalo como servicio:
+
+sudo systemctl enable docker
+sudo systemctl start docker
+
+6. Usar Docker Compose (Opcional):
+Si planeas usar Docker Compose, puedes instalarlo con el siguiente comando:
+
+sudo apt-get install -y python3-pip
+sudo pip3 install docker-compose
+Verifica la instalación de Docker Compose con:
+
+docker-compose --version
+Con estos pasos, Docker debería estar instalado y funcionando en tu Raspberry Pi, permitiéndote ejecutar contenedores y gestionar aplicaciones con facilidad.
